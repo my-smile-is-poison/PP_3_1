@@ -4,10 +4,7 @@ import com.example.springboot.project.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.example.springboot.project.servise.UserServise;
 
 
@@ -43,7 +40,7 @@ public class UserController {
     @PostMapping()
     public String saveUser(@ModelAttribute("user") User user) {
         userServise.saveUser(user);
-        return "redirect: /";
+        return "redirect:/";
     }
 
     @GetMapping("/updateUser")
@@ -52,15 +49,17 @@ public class UserController {
         model.addAttribute("user", userServise.showUserById(id));
         return "updateUserById";
     }
-    @PostMapping("/update")
+    @PutMapping("/update")
     public String update(@RequestParam(value = "id", required = false) Long id,
                          @ModelAttribute("user") User user) {
         userServise.updateUserById(id, user);
-        return "redirect: /";
+        return "redirect:/";
     }
-    @GetMapping("/d")
-    public String deleteUser(@ModelAttribute("user") User user) {
-        userServise.deleteUserById(user.getId());
-        return "redirect: /";
+
+
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
+        userServise.deleteUserById(id);
+        return "redirect:/";
     }
 }

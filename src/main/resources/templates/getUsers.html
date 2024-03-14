@@ -20,14 +20,16 @@
 
 USERS
 <br/><br/>
-<form th:method="GET" th:action="@{/new}" th:object="${user}">
+<form th:method="get" th:action="@{/new}" th:object="${user}">
     <input type="submit" value="сОЗДАЕМ ЧЕЛИКЕСА"/>
 </form>
 <br/>
 <div th:each="user :${user}">
     <a th:href="@{/id?id={id}(id=${user.getId()})}" th:text="${user.getName()}">user</a>
     <a th:href="'/updateUser?id='+${user.id}">Update</a>
-    <a th:href="'/d?id='+${user.id}">Delete</a>
+    <form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
+        <input th:type="submit" value="Delete user"/>
+    </form>
 </div>
 <br/>
 

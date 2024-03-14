@@ -15,7 +15,7 @@
 
 <body>
 
-<form th:method="POST" th:action="@{/update?id={id}(id=${user.getId()})}" th:object="${user}">
+<form th:method="PUT" th:action="@{/update?id={id}(id=${user.getId()})}" th:object="${user}">
     <label for="name">меняем имя: </label>
     <input type="text" th:field="*{name}" id="name"/>
     <br/>
